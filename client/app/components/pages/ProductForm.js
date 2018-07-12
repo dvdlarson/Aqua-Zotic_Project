@@ -13,10 +13,11 @@ class ProductForm extends Component {
         price:0.00,
         qty_on_hand:0,
         is_active : false,
-        file:'',
-        categories:['Freshwater', 'Saltwater','Dry_Goods']
+        file:''
+        
       };
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.clearField = this.clearField.bind(this);
       this.handleInputChange = this.handleInputChange.bind(this);
       // this.handleFiles = this.handleFiles.bind(this);
     }
@@ -25,7 +26,7 @@ class ProductForm extends Component {
         this.props.history.push('/admin');
         console.log(event);
         const input = document.querySelector('input[type="file"]');
-        const data = new FormData(event.target);
+        let data = new FormData(this.state);
         data.append('file', input.files[0]);
         console.log(data);
         fetch('/api/products', {
@@ -68,7 +69,9 @@ class ProductForm extends Component {
         
     //   }
     // }
-
+    clearField(event){
+      event.target.value='';
+    }
     handleInputChange(event) {
       const target = event.target;
       const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -79,7 +82,8 @@ class ProductForm extends Component {
     }
   
     render() {
-      let categories=this.state.categories;
+      const categories=['Freshwater', 'Saltwater','Dry_Goods']
+      
       let optionItems = categories.map((category)=>
           <option key={category}>{category}</option>
           );
@@ -101,7 +105,7 @@ class ProductForm extends Component {
             <input
               name="product_code"
               type="text"
-              onfocus="this.value=''"
+              onFocus={this.clearField}
               value={this.state.product_code}
               onChange={this.handleInputChange} />
           </label>
@@ -111,7 +115,7 @@ class ProductForm extends Component {
             <input
               name="description"
               type="text"
-              onfocus="this.value=''"
+              onFocus={this.clearField}
               value={this.state.description}
               onChange={this.handleInputChange} />
           </label>
@@ -121,7 +125,7 @@ class ProductForm extends Component {
             <input
               name="cost"
               type="Number"
-              onfocus="this.value=''"
+              onFocus={this.clearField}
               value={this.state.cost}
               onChange={this.handleInputChange} />
           </label>
@@ -131,7 +135,7 @@ class ProductForm extends Component {
             <input
               name="price"
               type="Number"
-              onfocus="this.value=''"
+              onFocus={this.clearField}
               value={this.state.price}
               onChange={this.handleInputChange} />
           </label>
@@ -141,7 +145,7 @@ class ProductForm extends Component {
             <input
               name="qty_on_hand"
               type="Number"
-              onfocus="this.value=''"
+              onFocus={this.clearField}
               value={this.state.qty_on_hand}
               onChange={this.handleInputChange} />
           </label>
