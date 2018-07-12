@@ -4,7 +4,7 @@ class ProductForm extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        product_code: 0,
+        product_code: 'Enter Code',
         category:'Freshwater',
         description:'Enter description',
         cost:0.00,
