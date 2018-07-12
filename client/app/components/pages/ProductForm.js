@@ -13,22 +13,57 @@ class ProductForm extends Component {
         price:0.00,
         qty_on_hand:0,
         is_active : false,
-        file:''
+        image_data:{}
         
       };
+      this.getFileData = this.getFileData.bind(this);
+      this.previewFile = this.previewFile.bind(this);
+      this.getFormData = this.getFormData.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.clearField = this.clearField.bind(this);
       this.handleInputChange = this.handleInputChange.bind(this);
       // this.handleFiles = this.handleFiles.bind(this);
     }
+
+    getFormData(object) {
+      const formData = new FormData();
+      Object.keys(object).forEach(key => formData.append(key, object[key]));
+      return formData;
+  }
+   
+  previewFile() {
+    var preview = document.querySelector('img');
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader();
+  
+    reader.addEventListener("load", function () {
+      preview.src = reader.result;
+      
+    }, false);
+  
+    if (file) {
+      reader.readAsDataURL(file);
+      
+    }
+  }
+
+  getFileData =() => {
+    var file    = document.querySelector('input[type=file]').files[0];
+    var imgData  = new FileReader();
+    if(file){ 
+    imgData.readAsDataURL(file);
+    this.setState({image_data:imgData.result})
+    }
+  }
+  
     handleSubmit(event) {
+      
         event.preventDefault();
         this.props.history.push('/admin');
-        console.log(event);
-        const input = document.querySelector('input[type="file"]');
-        let data = new FormData(this.state);
-        data.append('file', input.files[0]);
-        console.log(data);
+        this.getFileData();
+          const data = this.getFormData(this.state);
+          console.log(data);
+        
         fetch('/api/products', {
           method:'POST',
           body: data
@@ -46,29 +81,29 @@ class ProductForm extends Component {
     //   this.setState({
     //     files:files
     //   })
-    //   if (!files.length) {
-    //     thumbnail.innerHTML = "<p>No files selected!</p>";
-    //   } else {
-    //     thumbnail.innerHTML = "";
-    //     let list = document.createElement("ul");
-    //     thumbnail.appendChild(list);
+      // if (!files.length) {
+      //   thumbnail.innerHTML = "<p>No files selected!</p>";
+      // } else {
+      //   thumbnail.innerHTML = "";
+      //   let list = document.createElement("ul");
+      //   thumbnail.appendChild(list);
         
-    //       let li = document.createElement("li");
-    //       list.appendChild(li);
+      //     let li = document.createElement("li");
+      //     list.appendChild(li);
           
-    //       let img = document.createElement("img");
-    //       img.src = window.URL.createObjectURL(files);
-    //       img.height = 100;
-    //       img.onload = function() {
-    //         window.URL.revokeObjectURL(this.src);
-    //       }
-    //       li.appendChild(img);
-    //       var info = document.createElement("span");
-    //       info.innerHTML = files.name + ": " + files.size + " bytes";
-    //       li.appendChild(info);
+      //     let img = document.createElement("img");
+      //     img.src = window.URL.createObjectURL(files);
+      //     img.height = 100;
+      //     img.onload = function() {
+      //       window.URL.revokeObjectURL(this.src);
+      //     }
+      //     li.appendChild(img);
+      //     var info = document.createElement("span");
+      //     info.innerHTML = files.name + ": " + files.size + " bytes";
+      //     li.appendChild(info);
         
-    //   }
-    // }
+      // }
+    
     clearField(event){
       event.target.value='';
     }
@@ -161,11 +196,10 @@ class ProductForm extends Component {
           <br />
           <label> 
           Add Photo:
-          <input type="file" id="fileElem" accept="image/*" onChange={this.handleInputChange}/>
+          <input type="file" id="file" accept="image/*" onChange={this.previewFile}/>
           </label>
-          <div className="thumbnail">
-            <p>Preview - No photo selected</p>
-          </div>
+          <img id="thumbnail" className="thumb" src="" height="100" />
+            
 
           <br />
           <button className='btn btn-secondary'>Submit</button>
