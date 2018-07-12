@@ -33,6 +33,10 @@ const ProductSchema = new mongoose.Schema({
     type: Text,
     default: 'AAA000'
   },
+  img1: { 
+    data: Buffer, 
+    contentType: String
+  },
   meta: {
     requests:Number
   }
