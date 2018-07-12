@@ -9,7 +9,7 @@ module.exports = (app) => {
   });
 
   app.post('/api/products', function (req, res, next) {
-    const product = new Product();
+    const product = new Product(req.body);
 
     product.save()
       .then(() => res.json(product))
