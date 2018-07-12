@@ -37,8 +37,12 @@
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
     "react-router": "^4.2.0",
+<<<<<<< Updated upstream
     "react-router-dom": "^4.2.2",
     "react-select": "^1.2.1",
+=======
+    "react-router-dom": "^4.3.1",
+>>>>>>> Stashed changes
     "sass-loader": "^6.0.7",
     "video-react": "^0.13.0",
     "webpack": "^4.2.0",
