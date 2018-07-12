@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import { Player } from 'video-react';
+import Header from '../Header/Header';
+
 
 class Home extends Component {
       constructor(props) {
@@ -17,9 +19,20 @@ class Home extends Component {
   render(){
         return (
               
-                  <div className="jumbotron">
-                  <h1>Aqua-Zotic</h1>
-                  </div> 
+            <div>
+            <Header/ >
+       
+           
+         
+              <img src="https://i.ytimg.com/vi/--ztGaF4m2U/maxresdefault.jpg " alt="Internet"/>
+    
+          <div className="jumbotron">
+      
+      
+       
+          </div> 
+          
+      </div> 
   
             );
       }
