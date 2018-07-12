@@ -24,7 +24,7 @@ class Home extends Component {
        
            
          
-              <img src="https://i.ytimg.com/vi/--ztGaF4m2U/maxresdefault.jpg " alt="Internet"/>
+              <img src="https://i.ytimg.com/vi/--ztGaF4m2U/maxresdefault.jpg " width="1800" height="900" alt="Internet"/>
     
           <div className="jumbotron">
       
