@@ -2,10 +2,10 @@ import React from "react";
 
 const FishGallery = () => (
       <div>
-            <view>
+            
             <h1>Fish Tanks of Satisfied Customers</h1>
             <br/>
-            </view>
+            
            
             <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDdqyfyH526Chjqv6r-UkYjNXPlZ7CoJPzRqqi9Wm4-4jAvEvJGg" className="float-left" width="400" height="300" alt="Internet"/></div>
             <div><img src="https://static.boredpanda.com/blog/wp-content/uuuploads/creative-aquariums/creative-aquariums-16-1.jpg " className="float-left" width="400" height="300" alt="Internet"/></div>
