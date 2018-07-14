@@ -68,6 +68,13 @@ const NavTabs = () => (
         Login
       </Link>
     </li>
+    <li className="nav-item">
+      <Link
+        to="/checkout"
+        className={window.location.pathname === "/login" ? "nav-link active" : "nav-link"}>
+        Checkout
+      </Link>
+    </li>
 
     {/* <li className="nav-item">
       <Link

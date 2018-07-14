@@ -1,58 +1,66 @@
-import React, { Component } from "react";
+import React from 'react';
+import OktaSignIn from '@okta/okta-signin-widget';
 
-export default class Login extends Component {
-  // Setting the initial values of this.state.username and this.state.password
-  
-   constructor(props) {
-    super(props);
-
-    this.state = {
-      username: "",
-      password: ""
-    };
-  }
-        // handle any changes to the input fields
-        handleInputChange = event => {
-          // Pull the name and value properties off of the event.target (the element which triggered the event)
-          const { name, value } = event.target;
-      
-          // Set the state for the appropriate input field
-          this.setState({
-            [name]: value
-          });
-        };
-      
-        // When the form is submitted, prevent the default event and alert the username and password
-        handleFormSubmit = event => {
-          event.preventDefault();
-          alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-          this.setState({ username: "", password: "" });
-        };
-      
-        render() {
-          return (
-            <form>
-              <p>Username: {this.state.username}</p>
-              <p>Password: {this.state.password}</p>
-              <input
-                type="text"
-                placeholder="Username"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChange}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChange}
-              />
-              <button onClick={this.handleFormSubmit}>Submit</button>
-            </form>
-          );
-        }
+export default class Login extends React.Component{
+  constructor(){
+    super();
+    this.state = { user: null };
+    this.widget = new OktaSignIn({
+      baseUrl: 'https://dev-121546.oktapreview.com',
+      clientId: '0oafq1bebpKt2MC6A0h7',
+      redirectUri: 'http://localhost:8080/home',
+      authParams: {
+	    // issuer: 'https://dev-121546.oktapreview.com/oauth2/default',
+        responseType: 'id_token'
       }
-      
-    
+    });
 
+    this.showLogin = this.showLogin.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  componentDidMount(){
+    this.widget.session.get((response) => {
+      if(response.status !== 'INACTIVE'){
+        this.setState({user:response.login});
+      }else{
+        this.showLogin();
+      }
+    });
+  }
+
+  showLogin(){
+    Backbone.history.stop();
+    this.widget.renderEl({el:this.loginContainer},
+      (response) => {
+        this.setState({user: response.claims.email});
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  logout(){
+    this.widget.signOut(() => {
+      this.setState({user: null});
+      this.showLogin();
+    });
+  }
+
+  render(){
+    return(
+      <div>
+        {this.state.user ? (
+          <div className="container">
+            <div>Welcome, {this.state.user}!</div>
+            <button onClick={this.logout}>Logout</button>
+          </div>
+        ) : null}
+        {this.state.user ? null : (
+          <div ref={(div) => {this.loginContainer = div; }} />
+        )}
+      </div>
+    );
+  }
+}
