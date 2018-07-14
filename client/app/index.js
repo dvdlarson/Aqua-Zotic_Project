@@ -28,6 +28,7 @@ render((
     
       <Switch>
         <Route exact path="/" component={Home}/>
+		<Route path="/home" component={Home}/>
         <Route exact path="/counters" component={Counters}/>
         <Route exact path="/products" component={Products} />
         <Route exact path="/inventory" component={Inventory} />
