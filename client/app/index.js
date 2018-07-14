@@ -12,7 +12,7 @@ import App from './components/App/App';
 import NotFound from './components/App/NotFound';
 import Home from './components/pages/Home';
 import Login from "./components/pages/Login";
-//import Wrapper from "./components/Wrapper";
+import Wrapper from "./components/Wrapper";
 import Admin from "./components/pages/Admin";
 import FishGallery from "./components/pages/FishGallery";
 import Newsletter from "./components/pages/Newsletter";
@@ -21,7 +21,7 @@ import Products from "./components/pages/Products";
 import Counters from "./components/pages/Counters";
 import Checkout from "./components/pages/Checkout";
 import ProductTable from "./components/pages/ProductTable";
-
+import Contact from "./components/pages/Contact";
 render((
   <Router>
     <div>
@@ -29,12 +29,13 @@ render((
 
       <Switch>
         <Route exact path="/" component={Home}/>
-		<Route path="/home" component={Home}/>
+		    <Route path="/home" component={Home}/>
         <Route exact path="/counters" component={Counters}/>
         <Route exact path="/products" component={Products} />
         <Route exact path="/inventory" component={Inventory} />
         <Route exact path="/newsletter" component={Newsletter} />
         <Route path="/fishgallery" component={FishGallery} />
+        <Route exact path="/contact" component={Contact} />
         <Route path="/admin" component={Admin} />
         <Route path="/product_list" component={ProductTable} />
         <Route path="/login" component={Login} />
