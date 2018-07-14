@@ -16,7 +16,7 @@ module.exports = (app) => {
       .catch((err) => next(err));
   });
 
-  app.delete('/api/products/:id', function (req, res, next) {
+  app.delete('/api/products/delete/:id', function (req, res, next) {
     Product.findOneAndRemove({ _id: req.params.id })
       .exec()
       .then((product) => res.json())
@@ -25,7 +25,7 @@ module.exports = (app) => {
 
   
 
-  app.put('/api/products/:id/update', (req, res, next) => {
+  app.put('/api/products/update/:id', (req, res, next) => {
     Product.findById(req.params.id)
       .exec()
       .then((product) => {
