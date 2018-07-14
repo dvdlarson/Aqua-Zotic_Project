@@ -18,6 +18,7 @@ import FishGallery from "./components/pages/FishGallery";
 import Inventory from "./components/pages/Inventory";
 import Products from "./components/pages/Products";
 import Counters from "./components/pages/Counters";
+import Checkout from "./components/pages/Checkout";
 
 render((
   <Router>
@@ -33,6 +34,7 @@ render((
         <Route path="/fishgallery" component={FishGallery} />
         <Route path="/admin" component={Admin} />
         <Route path="/login" component={Login} />
+        <Route path="/checkout" component={Checkout} />
         <Route component={NotFound}/>
       </Switch>
    

@@ -10,6 +10,11 @@ const NODE_ENV = process.env.NODE_ENV;
 const isProd = NODE_ENV === 'production';
 
 module.exports = {
+  node: {
+    net: 'empty',
+    fs: 'empty',
+    tls: 'empty',
+  },
   entry: {
     'app': [
       helpers.root('client/app/index.js')
