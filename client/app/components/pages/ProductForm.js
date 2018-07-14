@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import 'whatwg-fetch';
-const Jimp = require("jimp");
+//const Jimp = require("jimp");
 
 class ProductForm extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class ProductForm extends Component {
         image_data:{}
         
       };
-      this.getFileData = this.getFileData.bind(this);
+     // this.getFileData = this.getFileData.bind(this);
       this.previewFile = this.previewFile.bind(this);
       this.getFormData = this.getFormData.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
