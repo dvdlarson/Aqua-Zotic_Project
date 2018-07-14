@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import 'whatwg-fetch';
+const Jimp = require("jimp");
 
 class ProductForm extends Component {
     constructor(props) {
@@ -30,39 +31,49 @@ class ProductForm extends Component {
       Object.keys(object).forEach(key => formData.append(key, object[key]));
       return formData;
   }
-   
+  updateState(data) {
+    this.setState({
+      image_data:data
+    })
+  }
   previewFile() {
     var preview = document.querySelector('img');
     var file    = document.querySelector('input[type=file]').files[0];
     var reader  = new FileReader();
   
+    
     reader.addEventListener("load", function () {
       preview.src = reader.result;
+      img_data=reader.result;
       
-    }, false);
+      
+    }, false)
   
     if (file) {
       reader.readAsDataURL(file);
-      
     }
   }
 
   getFileData =() => {
-    var file    = document.querySelector('input[type=file]').files[0];
-    var imgData  = new FileReader();
-    if(file){ 
-    imgData.readAsDataURL(file);
-    this.setState({image_data:imgData.result})
-    }
+    // var file    = document.querySelector('input[type=file]').files[0];
+    // var imgData  = new FileReader();
+    // if(file){ 
+    // imgData.readAsDataURL(file);
+    // this.setState({image_data:imgData.result})
+    // }
   }
   
     handleSubmit(event) {
-      
+        
         event.preventDefault();
         this.props.history.push('/admin');
-        this.getFileData();
+        const file    = document.querySelector('input[type=file]').files[0];
           const data = this.getFormData(this.state);
-          console.log(data);
+          // let image_data = {};
+          // image_data.data= new Buffer(file, 'base64');
+          // image_data.contentType='image/png';
+          // data.append(image_data);
+          // console.log('formdata: ',JSON.stringify(image_data));
         
         fetch('/api/products', {
           method:'POST',
@@ -196,13 +207,13 @@ class ProductForm extends Component {
           <br />
           <label> 
           Add Photo:
-          <input type="file" id="file" accept="image/*" onChange={this.previewFile}/>
+          <input type="file" id="file" accept="image/*" onChange={this.previewFile.bind(this)}/>
           </label>
           <img id="thumbnail" className="thumb" src="" height="100" />
             
 
           <br />
-          <button className='btn btn-secondary'>Submit</button>
+          <button onClick={this.handleSubmit} className='btn btn-secondary'>Submit</button>
         </form>
       );
     }

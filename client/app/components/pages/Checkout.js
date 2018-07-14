@@ -1,10 +1,10 @@
 import React from "react";
 
-const Relaxation = () => (
+const Checkout = () => (
       <div>
             <p>Relax</p>
       </div>
 
 );
 
-export default Relaxation;
+export default Checkout;
