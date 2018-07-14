@@ -60,6 +60,13 @@ const NavTabs = () => (
         Admin
       </Link>
     </li>
+    <li className="nav-item">
+      <Link
+        to="/product_list"
+        className={window.location.pathname === "/product_list" ? "nav-link active" : "nav-link"}>
+        Edit Products
+      </Link>
+    </li>
 
     <li className="nav-item">
       <Link

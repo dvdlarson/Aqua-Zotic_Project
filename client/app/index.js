@@ -15,10 +15,12 @@ import Login from "./components/pages/Login";
 //import Wrapper from "./components/Wrapper";
 import Admin from "./components/pages/Admin";
 import FishGallery from "./components/pages/FishGallery";
+import Newsletter from "./components/pages/Newsletter";
 import Inventory from "./components/pages/Inventory";
 import Products from "./components/pages/Products";
 import Counters from "./components/pages/Counters";
 import Checkout from "./components/pages/Checkout";
+import ProductTable from "./components/pages/ProductTable";
 
 render((
   <Router>
@@ -31,8 +33,10 @@ render((
         <Route exact path="/counters" component={Counters}/>
         <Route exact path="/products" component={Products} />
         <Route exact path="/inventory" component={Inventory} />
+        <Route exact path="/newsletter" component={Newsletter} />
         <Route path="/fishgallery" component={FishGallery} />
         <Route path="/admin" component={Admin} />
+        <Route path="/product_list" component={ProductTable} />
         <Route path="/login" component={Login} />
         <Route path="/checkout" component={Checkout} />
         <Route component={NotFound}/>

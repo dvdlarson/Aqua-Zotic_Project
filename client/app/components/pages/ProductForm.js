@@ -31,11 +31,10 @@ class ProductForm extends Component {
       Object.keys(object).forEach(key => formData.append(key, object[key]));
       return formData;
   }
-  updateState(data) {
-    this.setState({
-      image_data:data
-    })
+  clearField(event){
+    event.target.value='';
   }
+  
   previewFile() {
     var preview = document.querySelector('img');
     var file    = document.querySelector('input[type=file]').files[0];
@@ -66,6 +65,10 @@ class ProductForm extends Component {
     handleSubmit(event) {
         
         event.preventDefault();
+        var picData = document.getElementById("thumbnail").src;
+        this.setState({
+          image_data:picData
+        })
         this.props.history.push('/admin');
         const file    = document.querySelector('input[type=file]').files[0];
           const data = this.getFormData(this.state);
@@ -115,9 +118,7 @@ class ProductForm extends Component {
         
       // }
     
-    clearField(event){
-      event.target.value='';
-    }
+    
     handleInputChange(event) {
       const target = event.target;
       const value = target.type === 'checkbox' ? target.checked : target.value;
