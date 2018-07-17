@@ -39,7 +39,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
-    "react-router": "^4.2.0",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "sass-loader": "^6.0.7",
     "video-react": "^0.13.0",
@@ -48,7 +48,8 @@
     "webpack-dev-middleware": "^3.0.1",
     "webpack-hot-middleware": "^2.21.2",
     "webpack-merge": "^4.1.2",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "yarn": "^1.7.0"
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",

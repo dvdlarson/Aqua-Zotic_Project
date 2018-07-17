@@ -5,15 +5,19 @@ export default class Login extends React.Component{
   constructor(){
     super();
     this.state = { user: null };
-    this.widget = new OktaSignIn({
-      baseUrl: 'https://dev-121546.oktapreview.com',
-      clientId: '0oafq1bebpKt2MC6A0h7',
-      redirectUri: 'http://localhost:8080/home',
-      authParams: {
-	    // issuer: 'https://dev-121546.oktapreview.com/oauth2/default',
-        responseType: 'id_token'
-      }
-    });
+var config = {
+  baseUrl: 'https://dev-121546.oktapreview.com',
+  clientId: '0oafq1bebpKt2MC6A0h7',
+  redirectUri: 'http://localhost:8080/home',
+  authParams: {
+  // issuer: 'https://dev-121546.oktapreview.com/oauth2/default',
+    responseType: 'id_token'
+  }
+};
+config['features.registration'] = true;
+
+// config['authScheme'] = 'SESSION'; //
+    this.widget = new OktaSignIn(config);
 
     this.showLogin = this.showLogin.bind(this);
     this.logout = this.logout.bind(this);
