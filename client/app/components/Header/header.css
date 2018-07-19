@@ -1,11 +1,11 @@
 .header-banner {
     background-color: rgb(38, 40, 197);
-      background-image: url("/assets/images/geometry.svg");
-      background-repeat: repeat;
-      color: white;
+      background-image: url("https://png.pngtree.com/thumb_back/fw800/back_pic/03/78/33/2657c1392919bca.jpg");
+      /* background-repeat: repeat; */
+      color: black;
       min-height: 400px;
       padding: 180px 20px; 
-      padding-bottom: 140px;
+      padding-bottom:20px;
       text-align: center;
 }
 .header-banner h1 {

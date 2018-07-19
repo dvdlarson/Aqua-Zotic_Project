@@ -21,6 +21,7 @@
     "@babel/preset-env": "^7.0.0-beta.42",
     "@babel/preset-react": "^7.0.0-beta.42",
     "@okta/okta-react": "^1.0.2",
+    "@okta/okta-sdk-nodejs": "^1.1.0",
     "@okta/okta-signin-widget": "^2.10.0",
     "autoprefixer": "^8.2.0",
     "babel-loader": "^8.0.0-beta.2",
@@ -39,7 +40,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
-    "react-router": "^4.2.0",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "sass-loader": "^6.0.7",
     "video-react": "^0.13.0",
@@ -48,7 +49,8 @@
     "webpack-dev-middleware": "^3.0.1",
     "webpack-hot-middleware": "^2.21.2",
     "webpack-merge": "^4.1.2",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "yarn": "^1.7.0"
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",

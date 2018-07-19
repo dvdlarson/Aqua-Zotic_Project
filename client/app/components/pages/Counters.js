@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-
+import "../Style/Counters.css";
 
 class Counters extends Component {
   constructor(props) {
@@ -86,7 +86,7 @@ class Counters extends Component {
 
   render() {
     return (
-      <>
+      <div className="counters">
         <p>Counters:</p>
 
         <ul>
@@ -101,7 +101,7 @@ class Counters extends Component {
         </ul>
 
         <button onClick={this.newCounter}>New counter</button>
-      </>
+      </div>
     );
   }
 }
