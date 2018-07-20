@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 import ProductForm from './ProductForm';
+import "../Style/Admin.css";
 
 class Admin extends Component {
   constructor(props) {
@@ -98,10 +99,10 @@ class Admin extends Component {
 
   render() {
     return (
-      <>
+      <div className="admin">
         <p>Add New Product:</p>
         <ProductForm />
-      </>
+      </div>
     );
   }
 }

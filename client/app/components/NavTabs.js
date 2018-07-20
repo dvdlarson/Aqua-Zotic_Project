@@ -49,9 +49,10 @@ const NavTabs = () => (
       <Link
         to="/contact"
         className={window.location.pathname === "/contact" ? "nav-link active" : "nav-link"}>
-        Contact
+        Questions
       </Link>
     </li>
+
 
     <li className="nav-item">
       <Link

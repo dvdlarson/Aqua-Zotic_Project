@@ -1,6 +1,8 @@
 import React from "react";
+import "../Style/Checkout.css";
 
 const Checkout = () => (
+
 <html>
 <body>
   <div class="container">
@@ -46,6 +48,7 @@ const Checkout = () => (
               <strong>$20</strong>
             </li>
           </ul>
+
 
           <form class="card p-2">
             <div class="input-group">

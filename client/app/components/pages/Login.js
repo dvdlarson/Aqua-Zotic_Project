@@ -54,7 +54,7 @@ config['features.registration'] = true;
 
   render(){
     return(
-      <div>
+      <div className="login">
         {this.state.user ? (
           <div className="container">
             <div>Welcome, {this.state.user}!</div>
