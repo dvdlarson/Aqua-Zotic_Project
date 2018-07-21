@@ -38,7 +38,7 @@ render((
         <Route path="/fishgallery" component={FishGallery} />
         <Route exact path="/contact" component={Contact} />
         <Route path="/admin" component={Admin} />
-        <Route path="/product_list" component={ProductTable} />
+        <Route path="/product_table" component={ProductTable} />
         <Route path="/login" component={Login} />
         <Route path="/checkout" component={Checkout} />
         <Route component={NotFound}/>

@@ -63,8 +63,8 @@ const NavTabs = () => (
     </li>
     <li className="nav-item">
       <Link
-        to="/product_list"
-        className={window.location.pathname === "/product_list" ? "nav-link active" : "nav-link"}>
+        to="/product_table"
+        className={window.location.pathname === "/product_table" ? "nav-link active" : "nav-link"}>
         Edit Products
       </Link>
     </li>

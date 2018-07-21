@@ -33,8 +33,7 @@ const ProductSchema = new mongoose.Schema({
     default: 'AAA000'
   },
   image_data: { 
-    data: Buffer, 
-    contentType: String
+    type:String
   }
  
 });

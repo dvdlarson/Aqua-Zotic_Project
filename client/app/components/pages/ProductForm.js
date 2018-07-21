@@ -14,7 +14,7 @@ class ProductForm extends Component {
         price:0.00,
         qty_on_hand:0,
         is_active : false,
-        image_data:{}
+        image_data:''
         
       };
      // this.getFileData = this.getFileData.bind(this);
@@ -43,7 +43,7 @@ class ProductForm extends Component {
     
     reader.addEventListener("load", function () {
       preview.src = reader.result;
-      img_data=reader.result;
+      
       
       
     }, false)
@@ -66,12 +66,14 @@ class ProductForm extends Component {
         
         event.preventDefault();
         var picData = document.getElementById("thumbnail").src;
+        console.log(`picdata: ${picData}`);
         this.setState({
           image_data:picData
-        })
+        }, () => {
+
+        console.log(`state: ${JSON.stringify(this.state)}`);
         this.props.history.push('/admin');
-        const file    = document.querySelector('input[type=file]').files[0];
-          const data = this.getFormData(this.state);
+        const data = this.getFormData(this.state);
           // let image_data = {};
           // image_data.data= new Buffer(file, 'base64');
           // image_data.contentType='image/png';
@@ -83,6 +85,11 @@ class ProductForm extends Component {
           body: data
         })
         .then(alert("Product has been added."));
+
+
+
+        });
+        
         
        
     }

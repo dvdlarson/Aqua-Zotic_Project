@@ -37,6 +37,7 @@ config['features.registration'] = true;
     Backbone.history.stop();
     this.widget.renderEl({el:this.loginContainer},
       (response) => {
+    
         this.setState({user: response.claims.email});
       },
       (err) => {
