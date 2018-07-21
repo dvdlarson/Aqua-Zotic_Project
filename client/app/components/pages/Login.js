@@ -1,16 +1,20 @@
 import React from 'react';
 import OktaSignIn from '@okta/okta-signin-widget';
+import { withAuth } from '@okta/okta-react';
+import "../Style/Login.css";
 
-export default class Login extends React.Component{
+
+export default withAuth(class Login extends React.Component{
   constructor(){
     super();
-    this.state = { user: null };
+    this.state = {  user: null };
 var config = {
   baseUrl: 'https://dev-121546.oktapreview.com',
   clientId: '0oafq1bebpKt2MC6A0h7',
   redirectUri: 'http://localhost:8080/home',
   authParams: {
   // issuer: 'https://dev-121546.oktapreview.com/oauth2/default',
+   scopes: ['openid', 'email', 'profile', 'address', 'phone'],
     responseType: 'id_token'
   }
 };
@@ -27,6 +31,7 @@ config['features.registration'] = true;
     this.widget.session.get((response) => {
       if(response.status !== 'INACTIVE'){
         this.setState({user:response.login});
+       
       }else{
         this.showLogin();
       }
@@ -39,6 +44,7 @@ config['features.registration'] = true;
       (response) => {
     
         this.setState({user: response.claims.email});
+        localStorage.setItem('okta-token-storage', JSON.stringify(response.claims));
       },
       (err) => {
         console.log(err);
@@ -68,4 +74,4 @@ config['features.registration'] = true;
       </div>
     );
   }
-}
+});
