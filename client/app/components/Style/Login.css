@@ -11,13 +11,13 @@
     }
 
 .auth-org-logo {
-  background: url ('../images/logo.png');
+  background: url ('logo.png');
 }
 
 .okta-sign-in-widget {
-  background: url ('../images/logo.png');
+  background: url ('logo.png');
 }
 
 .beacon-container {
-  background: url ('../images/logo.png');
+  background: url ('logo.png');
 }

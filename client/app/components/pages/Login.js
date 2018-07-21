@@ -3,6 +3,7 @@ import OktaSignIn from '@okta/okta-signin-widget';
 import { withAuth } from '@okta/okta-react';
 import "../Style/Login.css";
 
+
 export default withAuth(class Login extends React.Component{
   constructor(){
     super();

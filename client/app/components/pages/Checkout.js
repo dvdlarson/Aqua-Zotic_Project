@@ -186,6 +186,7 @@ export default withAuth(class Checkout extends React.Component{
                   Credit card number is required
                 </div>
               </div>
+              <div class ="row">
               <div class="cvv col-md-3 mb-3">
                 <label for="cc-expiration">Expiration date</label>
                 <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
@@ -198,6 +199,7 @@ export default withAuth(class Checkout extends React.Component{
                 <label for="cvv">CVV</label>
                 <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
                 </input>
+                </div>
                 </div>
               <hr class="mb-4"></hr>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Submit Your Order</button>
