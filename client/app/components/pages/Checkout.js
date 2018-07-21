@@ -1,12 +1,58 @@
-import React from "react";
+import React from 'react';
+import { withAuth } from '@okta/okta-react';
 import "../Style/Checkout.css";
 
-const Checkout = () => (
+export default withAuth(class Checkout extends React.Component{
 
-<html>
-<body>
-  <div class="container">
-  <h2>Your Checkout</h2>
+  state = {
+    claims: []
+  };
+
+  constructor(){
+    super();
+    // state = {
+    //   currentUserEmail: '',
+    //   currentUserName: '',
+    //   currentUserAddress: ''
+  
+
+  }
+
+  componentDidMount() {
+     const myClaims = JSON.parse(localStorage.getItem('okta-token-storage'));
+    this.setState({
+      claims: myClaims
+    });
+  }
+
+  // showLogin(){
+  //   Backbone.history.stop();
+  //   this.widget.renderEl({el:this.loginContainer},
+  //     (response) => {
+  //       this.setState({user: response.claims.address});
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
+
+  // logout(){
+  //   this.widget.signOut(() => {
+  //     this.setState({user: null});
+  //     this.showLogin();
+  //   });
+  // }
+
+  render(){
+
+    // const { currentUserEmail, currentUserName, currentUserAddress } = this.state;
+    const myClaims = JSON.parse(localStorage.getItem('okta-token-storage'));
+    // const h = this.state.claims.address.street_address;
+    return(
+
+<div class="container">
+  <h2 id="checkoutHead">Checkout</h2>
 
   <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
@@ -49,8 +95,7 @@ const Checkout = () => (
             </li>
           </ul>
 
-
-          <form class="card p-2">
+          <form class="redeem card p-2">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Promo code">
               </input>
@@ -65,77 +110,48 @@ const Checkout = () => (
        <h4 class="mb-3">Billing address</h4>
           <form class="needs-validation" novalidate="">
           <div class="row">
-          <div class="col-md-6 mb-3">
+          <div class="firtName col-md-10">
           <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                <input type="text" class="form-control" id="firstName" placeholder={myClaims.given_name} required="">
                 </input>
           </div>
           </div>
-          <div class="col-md-6 mb-3">
+        
+          <div class="lastName col-md-10">
                 <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                <input type="text" class="form-control" id="lastName" placeholder={myClaims.family_name} required="">
                 </input>
                 </div>
-                <div class="mb-3">
-              <label for="username">Username</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>
-                <input type="text" class="form-control" id="username" placeholder="Username" required="">
-                </input>
-            </div>
-            </div>
-            <div class="mb-3">
-              <label for="email">Email <span class="text-muted">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+    
+            <div class="userName col-md-10">
+              <label for="email">Username (E-mail)</label>
+              <input type="email" class="form-control" id="email" placeholder={myClaims.email}>
               </input>
               </div>
-              <div class="mb-3">
+              <div class="address col-md-10">
               <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+              <input type="text" class="form-control" id="address" placeholder={myClaims.address.street_address} required="">
               </input>
               </div>
-              <div class="row">
-              <div class="col-md-5 mb-3">
-                <label for="country">Country</label>
-                <select class="custom-select d-block w-100" id="country" required="">
-                  <option value="">Choose...</option>
-                  <option>United States</option>
-                </select>
-                </div>
+              <div class="city col-md-7 mb-6">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" placeholder={myClaims.address.locality} required="">
+                </input>
               </div>
-              <div class="col-md-4 mb-3">
+              <div class="state col-md-7 mb-6">
                 <label for="state">State</label>
-                <select class="custom-select d-block w-100" id="state" required="">
-                  <option value="">Choose...</option>
-                  <option>California</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please provide a valid state.
+                <input type="text" class="form-control" id="state" placeholder={myClaims.address.region} required="">
+                </input>
                 </div>
-              </div>
-              <div class="col-md-3 mb-3">
+              <div class="zip col-md-4 mb-3">
                 <label for="zip">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required="">
+                <input type="text" class="form-control" id="zip" placeholder={myClaims.address.postal_code} required="">
                 </input>
                 </div>
                 <hr class="mb-4"></hr>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="same-address"></input>
-              <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-              <br></br>
-            </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="save-info"></input>
-              <br></br>
-              <label class="custom-control-label" for="save-info">Save this information for next time</label>
-              <br></br>
-            </div>
-            <hr class="mb-4"></hr>
             <h4 class="mb-3">Payment</h4>
             <div class="d-block my-3">
-              <div class="custom-control custom-radio">
+              <div class="credit custom-control custom-radio">
                 <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
                 </input>
                 <label class="custom-control-label" for="credit">Credit card</label>
@@ -162,7 +178,7 @@ const Checkout = () => (
                 </div>
               </div>
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="ccNumber col-md-6 mb-3">
                 <label for="cc-number">Credit card number</label>
                 <input type="text" class="form-control" id="cc-number" placeholder="" required="">
                 </input>
@@ -170,14 +186,19 @@ const Checkout = () => (
                   Credit card number is required
                 </div>
               </div>
-              <div class="col-md-3 mb-3">
-                <label for="cc-expiration">CVV</label>
+              <div class="cvv col-md-3 mb-3">
+                <label for="cc-expiration">Expiration date</label>
                 <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
                 </input>
                 <div class="invalid-feedback">
                   Security code required
                 </div>
               </div>
+              <div class="cvv col-md-3 mb-3">
+                <label for="cvv">CVV</label>
+                <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+                </input>
+                </div>
               <hr class="mb-4"></hr>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Submit Your Order</button>
             <br></br>
@@ -185,8 +206,6 @@ const Checkout = () => (
       </div>
     </div>
     </div>
-    </body>
-    </html>
-);
-
-export default Checkout;
+    );
+  }
+});

@@ -9,3 +9,15 @@
       align-content: flex-start;
       overflow: auto;
     }
+
+.auth-org-logo {
+  background: url ('../images/logo.png');
+}
+
+.okta-sign-in-widget {
+  background: url ('../images/logo.png');
+}
+
+.beacon-container {
+  background: url ('../images/logo.png');
+}

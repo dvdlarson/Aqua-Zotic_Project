@@ -23,9 +23,16 @@ import Counters from "./components/pages/Counters";
 import Checkout from "./components/pages/Checkout";
 import ProductTable from "./components/pages/ProductTable";
 import Contact from "./components/pages/Contact";
-
+import { Security } from '@okta/okta-react';
+import { SecureRoute, ImplicitCallback } from '@okta/okta-react';
 render((
   <Router>
+                <Security
+client_Id = '0oafq1bebpKt2MC6A0h7'
+ issuer =  'https://dev-121546.oktapreview.com/oauth2/default'
+
+          redirect_uri= 'http://localhost:8080/home'
+        >
     <div>
     <App>
       <Switch>
@@ -45,5 +52,6 @@ render((
       </Switch>
     </App>
     </div>
+    </Security>
   </Router>
 ), document.getElementById('app'));
