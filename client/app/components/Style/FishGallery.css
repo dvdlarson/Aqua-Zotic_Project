@@ -24,4 +24,7 @@
       text-align: left;
     }
     
-   
+   .frame{
+    border: rgba(34, 163, 192, 0.521) 2px groove;
+    padding:20px;
+   }

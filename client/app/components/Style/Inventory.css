@@ -13,3 +13,8 @@
       overflow: auto;
     
     }
+
+    .iframe{
+      border: rgba(34, 163, 192, 0.521) 4px groove;
+      padding: 3px;
+    }
