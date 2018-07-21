@@ -1,11 +1,16 @@
 .admin {
       padding-top: 50px;
-      background: #ECEFF1;
+      background: rgba(217, 234, 238, 0.521);
       height: 100%;
       display: flex;
       flex-flow: row wrap;
-      padding: 40px;
+      padding-right: 500px;
       justify-content: space-around;
       align-content: flex-start;
       overflow: auto;
+    }
+
+    .productform {
+      padding-left: 400px;
+      padding-bottom: 50px;
     }

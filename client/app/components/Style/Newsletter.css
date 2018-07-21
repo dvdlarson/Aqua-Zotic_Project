@@ -1,6 +1,6 @@
 .newsletter {
       padding-top: 50px;
-      background: #ECEFF1;
+      background: rgba(217, 234, 238, 0.521);
       height: 100%;
       display: flex;
       flex-flow: row wrap;
@@ -8,9 +8,10 @@
       justify-content: space-around;
       align-content: flex-start;
       overflow: auto;
+      font-size: 17px;
     }
 
-    .newsletter > body {
+    .newsletter  body {
       font-family: libre baskerville;
       border: 20px solid #bdc3c7;
       padding:20px;

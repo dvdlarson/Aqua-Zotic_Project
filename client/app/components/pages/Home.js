@@ -21,7 +21,7 @@ class Home extends Component {
 
       <div className="home">
         <Header />
-
+        <div className="container-fluid">
         {/* <div className="container"> */}
         <div className="row">
           <div className="col-6">
@@ -47,6 +47,8 @@ class Home extends Component {
         <div className="row">
     
         <div className="col-4">
+        
+        {/* <img src="http://edspetworld.org/_Media/angel-fish-cichlid_med.jpeg" width="300" height="200" alt="Internet" /> */}
           <img src="http://www.wilcoxandsonauto.com/wp-content/uploads/2015/05/Ribbon-Family-Owned.jpg" width="300" height="200" alt="Internet" />
 
           </div>
@@ -78,7 +80,8 @@ class Home extends Component {
         </div>
         {/* </div> */}
       </div>
-      // </div>
+      </div>
+   
     );
   }
 }
