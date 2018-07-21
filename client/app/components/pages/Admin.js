@@ -99,12 +99,19 @@ class Admin extends Component {
 
   render() {
     return (
+      <div className="row">
+            <div className="col-12">
       <div className="admin">
-        <p>Add New Product:</p>
+     
+        <div className="productform">
+        <h2>Add New Product:</h2>
         <ProductForm />
+        </div>
       </div>
+      </div>
+    </div>
     );
   }
 }
-
+ 
 export default Admin;

@@ -4,9 +4,10 @@
       position: relative;
       color: white;
       overflow: auto;
+     
     }
     
-    .footer > .bottom {
+    .bottom {
       position: absolute;
       bottom: 0;
       left: 0;

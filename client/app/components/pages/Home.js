@@ -21,11 +21,11 @@ class Home extends Component {
 
       <div className="home">
         <Header />
-
+        <div className="container-fluid">
         {/* <div className="container"> */}
         <div className="row">
           <div className="col-6">
-            <iframe width="100%" height="480" src="https://www.youtube.com/embed/_oCSnrGYc9s?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe width="100%" height="450" src="https://www.youtube.com/embed/_oCSnrGYc9s?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
           <div className="col-6">
             <div>
@@ -47,16 +47,18 @@ class Home extends Component {
         <div className="row">
     
         <div className="col-4">
-          <img src="http://www.wilcoxandsonauto.com/wp-content/uploads/2015/05/Ribbon-Family-Owned.jpg" width="300" height="200" alt="Internet" />
+        
+        {/* <img src="http://edspetworld.org/_Media/angel-fish-cichlid_med.jpeg" width="300" height="200" alt="Internet" /> */}
+          <img src="http://www.wilcoxandsonauto.com/wp-content/uploads/2015/05/Ribbon-Family-Owned.jpg" width="400" height="300" alt="Internet" />
 
           </div>
           <div className="col-4">
-          <img src="  http://www.robesoncountysw.org/images/Site-Sign_ho.jpg" width="300" height="200" alt="Internet" />
+          <img src="  http://www.robesoncountysw.org/images/Site-Sign_ho.jpg" width="400" height="300" alt="Internet" />
          
           </div>
          
           <div className="col-4">
-          <img src="http://www.developmentnews.in/wp-content/uploads/2017/06/Overall-1.jpg" width="300" height="200" alt="Internet" />
+          <img src="http://www.developmentnews.in/wp-content/uploads/2017/06/Overall-1.jpg" width="400" height="300" alt="Internet" />
         
           </div>
         
@@ -78,7 +80,8 @@ class Home extends Component {
         </div>
         {/* </div> */}
       </div>
-      // </div>
+      </div>
+   
     );
   }
 }
