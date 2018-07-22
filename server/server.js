@@ -19,7 +19,7 @@ const cors = require('cors');
 // ================================================================================================
 
 // Set up Mongoose
-mongoose.connect('mongodb://reactapp:heroku1041@ds243501.mlab.com:43501/heroku_2zqb0mqw');
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise;
 
 const app = express();
