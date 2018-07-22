@@ -19,7 +19,7 @@ const cors = require('cors');
 // ================================================================================================
 
 // Set up Mongoose
-mongoose.connect(process.env.MONGOLAB_CHARCOAL_URI);
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise;
 
 const app = express();
