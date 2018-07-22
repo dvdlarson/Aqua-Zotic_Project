@@ -21,15 +21,15 @@ const NavTabs = () => (
       </Link>
     </li>
 
-    <li className="nav-item">
+    {/* <li className="nav-item">
       <Link
         to="/counters"
         className={window.location.pathname === "/counters" ? "nav-link active" : "nav-link"}>
         Counters
       </Link>
-    </li>
+    </li> */}
 
-<li className="nav-item">
+    <li className="nav-item">
       <Link
         to="/inventory"
         className={window.location.pathname === "/inventory" ? "nav-link active" : "nav-link"}>
@@ -63,8 +63,8 @@ const NavTabs = () => (
     </li>
     <li className="nav-item">
       <Link
-        to="/product_table"
-        className={window.location.pathname === "/product_table" ? "nav-link active" : "nav-link"}>
+        to="/products"
+        className={window.location.pathname === "/products" ? "nav-link active" : "nav-link"}>
         Edit Products
       </Link>
     </li>
@@ -79,7 +79,7 @@ const NavTabs = () => (
     <li className="nav-item">
       <Link
         to="/checkout"
-        className={window.location.pathname === "/login" ? "nav-link active" : "nav-link"}>
+        className={window.location.pathname === "/checkout" ? "nav-link active" : "nav-link"}>
         Checkout
       </Link>
     </li>

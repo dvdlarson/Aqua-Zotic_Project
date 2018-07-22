@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Footer from '../Footer/Footer';
 import NavTabs from '../NavTabs';
 
+
 const App = ({ children }) => (
   <>
     {/* <Header /> */}

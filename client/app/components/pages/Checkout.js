@@ -1,213 +1,187 @@
 import React from 'react';
-import { withAuth } from '@okta/okta-react';
 import "../Style/Checkout.css";
 
-export default withAuth(class Checkout extends React.Component{
+export default class Checkout extends React.Component {
 
-  state = {
-    claims: []
-  };
-
-  constructor(){
-    super();
-    // state = {
-    //   currentUserEmail: '',
-    //   currentUserName: '',
-    //   currentUserAddress: ''
-  
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      cart: [],
+      claims: {
+        address: {
+          street_address: "",
+        }
+      }
+    }
   }
 
   componentDidMount() {
-     const myClaims = JSON.parse(localStorage.getItem('okta-token-storage'));
+    const myClaims = JSON.parse(localStorage.getItem('user'));
+    if (!myClaims)
+      this.props.history.push("/login");
+
+    let c = Object.assign(this.state.claims, myClaims);
     this.setState({
-      claims: myClaims
+      claims: c
+    }, () => {
+      this.populateCart();
     });
   }
 
-  // showLogin(){
-  //   Backbone.history.stop();
-  //   this.widget.renderEl({el:this.loginContainer},
-  //     (response) => {
-  //       this.setState({user: response.claims.address});
-  //     },
-  //     (err) => {
-  //       console.log(err);
-  //     }
-  //   );
-  // }
+  populateCart = () => {
+    let cached = localStorage.getItem('cart');
+    if (!cached)
+      cached = "[]";
 
-  // logout(){
-  //   this.widget.signOut(() => {
-  //     this.setState({user: null});
-  //     this.showLogin();
-  //   });
-  // }
+    let cachedCard = JSON.parse(cached);
 
-  render(){
+    this.setState({ cart: cachedCard });
+  }
 
-    // const { currentUserEmail, currentUserName, currentUserAddress } = this.state;
-    const myClaims = JSON.parse(localStorage.getItem('okta-token-storage'));
-    // const h = this.state.claims.address.street_address;
-    return(
+  render() {
+    let { claims, cart } = this.state;
+    return (
+      <div className="container">
+        <h2>Your Checkout</h2>
 
-<div class="container">
-  <h2 id="checkoutHead">Checkout</h2>
+        <div className="row">
+          <div className="col-md-4 order-md-2 mb-4">
+            <h4 className="d-flex justify-content-between align-items-center mb-3">
+              <span className="text-muted">Your cart</span>
+              <span className="badge badge-secondary badge-pill">{cart.length}</span>
+            </h4>
 
-  <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill">3</span>
-          </h4>
-          <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$12</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">-$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
-          </ul>
-
-          <form class="redeem card p-2">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code">
-              </input>
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Redeem</button>
-              </div>
+            <div>
+              <ul>
+                {
+                  cart.map((product, i) => {
+                    return (
+                      <li key={i} className="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                          <h6 className="my-0">{product.name}</h6>
+                          <small className="text-muted">{product.description}</small>
+                        </div>
+                        <span className="text-muted">{product.price}</span>
+                      </li>);
+                  })
+                }
+              </ul>
             </div>
-          </form>
-        </div>
 
-      <div class="col-md-8 order-md-1">
-       <h4 class="mb-3">Billing address</h4>
-          <form class="needs-validation" novalidate="">
-          <div class="row">
-          <div class="firtName col-md-10">
-          <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder={myClaims.given_name} required="">
+
+            <form className="card p-2">
+              <div className="input-group">
+                <input type="text" className="form-control" placeholder="Promo code">
                 </input>
+                <div className="input-group-append">
+                  <button type="submit" className="btn btn-secondary">Redeem</button>
+                </div>
+              </div>
+            </form>
           </div>
-          </div>
-        
-          <div class="lastName col-md-10">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder={myClaims.family_name} required="">
-                </input>
-                </div>
-    
-            <div class="userName col-md-10">
-              <label for="email">Username (E-mail)</label>
-              <input type="email" class="form-control" id="email" placeholder={myClaims.email}>
-              </input>
-              </div>
-              <div class="address col-md-10">
-              <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" placeholder={myClaims.address.street_address} required="">
-              </input>
-              </div>
-              <div class="city col-md-7 mb-6">
-                <label for="city">City</label>
-                <input type="text" class="form-control" id="city" placeholder={myClaims.address.locality} required="">
+
+          <div className="col-md-8 order-md-1">
+            <h4 className="mb-3">Billing address</h4>
+            <form className="needs-validation" noValidate="">
+              <div className="mb-3">
+                <label htmlFor="firstName">First name</label>
+                <input type="text" className="form-control" id="firstName" value={claims.given_name} required>
                 </input>
               </div>
-              <div class="state col-md-7 mb-6">
-                <label for="state">State</label>
-                <input type="text" class="form-control" id="state" placeholder={myClaims.address.region} required="">
+              <div className="mb-3">
+                <label htmlFor="lastName">Last name</label>
+                <input type="text" className="form-control" id="lastName" value={claims.family_name} required>
                 </input>
-                </div>
-              <div class="zip col-md-4 mb-3">
-                <label for="zip">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder={myClaims.address.postal_code} required="">
-                </input>
-                </div>
-                <hr class="mb-4"></hr>
-            <h4 class="mb-3">Payment</h4>
-            <div class="d-block my-3">
-              <div class="credit custom-control custom-radio">
-                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
-                </input>
-                <label class="custom-control-label" for="credit">Credit card</label>
               </div>
-              <div class="custom-control custom-radio">
-                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
-                </input>
-                <label class="custom-control-label" for="debit">Debit card</label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
-                </input>
-                <label class="custom-control-label" for="paypal">Paypal</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="cc-name">Name on card</label>
-                <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                </input>
-                <small class="text-muted">Full name as displayed on card</small>
-                <div class="invalid-feedback">
-                  Name on card is required
+              <div className="mb-3">
+                <label htmlFor="username">Username</label>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text"><i className="fa fa-user"></i></span>
+                  </div>
+                  <input type="text" className="form-control" id="username" value={claims.email} required>
+                  </input>
                 </div>
               </div>
-              </div>
-              <div class="ccNumber col-md-6 mb-3">
-                <label for="cc-number">Credit card number</label>
-                <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+              <div className="mb-3">
+                <label htmlFor="address">Address</label>
+                <input type="text" className="form-control" id="address" value={claims.address.street_address} required>
                 </input>
-                <div class="invalid-feedback">
+              </div>
+              <div className="mb-3">
+                <label htmlFor="state">City</label>
+                <input type="text" className="form-control" id="stage" value={claims.address.locality} required></input>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="zip">Zip</label>
+                <input type="text" className="form-control" id="stage" value={claims.address.postal_code} required>
+                </input>
+              </div>
+              <hr className="mb-4"></hr>
+              <div className="custom-control custom-checkbox">
+                <input type="checkbox" className="custom-control-input" id="same-address"></input>
+                <label className="custom-control-label" htmlFor="same-address">Shipping address is the same as my billing address</label>
+                <br></br>
+              </div>
+              <div className="custom-control custom-checkbox">
+                <input type="checkbox" className="custom-control-input" id="save-info"></input>
+                <br></br>
+                <label className="custom-control-label" htmlFor="save-info">Save this information for next time</label>
+                <br></br>
+              </div>
+              <hr className="mb-4"></hr>
+              <h4 className="mb-3">Payment</h4>
+              <div className="d-block my-3">
+                <div className="custom-control custom-radio">
+                  <input id="credit" name="paymentMethod" type="radio" className="custom-control-input" checked="" required="">
+                  </input>
+                  <label className="custom-control-label" htmlFor="credit">Credit card</label>
+                </div>
+                <div className="custom-control custom-radio">
+                  <input id="debit" name="paymentMethod" type="radio" className="custom-control-input" required="">
+                  </input>
+                  <label className="custom-control-label" htmlFor="debit">Debit card</label>
+                </div>
+                <div className="custom-control custom-radio">
+                  <input id="paypal" name="paymentMethod" type="radio" className="custom-control-input" required="">
+                  </input>
+                  <label className="custom-control-label" htmlFor="paypal">Paypal</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-6 mb-3">
+                  <label htmlFor="cc-name">Name on card</label>
+                  <input type="text" className="form-control" id="cc-name" placeholder="" required="">
+                  </input>
+                  <small className="text-muted">Full name as displayed on card</small>
+                  <div className="invalid-feedback">
+                    Name on card is required
+                </div>
+                </div>
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor="cc-number">Credit card number</label>
+                <input type="text" className="form-control" id="cc-number" placeholder="" required="">
+                </input>
+                <div className="invalid-feedback">
                   Credit card number is required
                 </div>
               </div>
-              <div class ="row">
-              <div class="cvv col-md-3 mb-3">
-                <label for="cc-expiration">Expiration date</label>
-                <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+              <div className="col-md-3 mb-3">
+                <label htmlFor="cc-expiration">CVV</label>
+                <input type="text" className="form-control" id="cc-cvv" placeholder="" required="">
                 </input>
-                <div class="invalid-feedback">
+                <div className="invalid-feedback">
                   Security code required
                 </div>
               </div>
-              <div class="cvv col-md-3 mb-3">
-                <label for="cvv">CVV</label>
-                <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                </input>
-                </div>
-                </div>
-              <hr class="mb-4"></hr>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit Your Order</button>
-            <br></br>
-          </form>
+              <hr className="mb-4"></hr>
+              <button className="btn btn-primary btn-lg btn-block" type="submit">Submit Your Order</button>
+              <br></br>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
     );
   }
-});
+}

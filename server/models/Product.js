@@ -1,17 +1,21 @@
 const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
-  product_code: {
+  sku: {
     type: String,
     default: 'AAA000'
+  },
+  name: {
+    type: String,
+    default: ''
   },
   category: {
     type: String,
-    default: 'AAA000'
+    default: 'General'
   },
   description: {
     type: String,
-    default: 'AAA000'
+    default: ''
   },
   cost: {
     type: Number,
@@ -28,14 +32,10 @@ const ProductSchema = new mongoose.Schema({
   is_active: {
     type: Boolean
   },
-  description: {
-    type: String,
-    default: 'AAA000'
-  },
-  image_data: { 
-    type:String
+  image_data: {
+    type: String
   }
- 
+
 });
 
 module.exports = mongoose.model('Product', ProductSchema);
