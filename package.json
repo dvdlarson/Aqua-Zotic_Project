@@ -1,11 +1,11 @@
 {
-  "name": "MERNboilerplate",
+  "name": "Aquazotic",
   "version": "1.0.0",
-  "description": "MERN stack project boilerplate",
-  "author": "Eugene Cheung",
+  "description": "Aquazotic React Project",
+  "author": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arkon/MERN-boilerplate.git"
+    "url": ""
   },
   "license": "MIT",
   "private": true,
